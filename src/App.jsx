@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Header from "./components/Header.jsx"
+import CardContainer from "./components/CardContainer.jsx"
 import './App.css'
 
 function App() {
@@ -31,9 +32,36 @@ function App() {
     fetchData();
   }, [])
 
-  return (
-    <Header score={score} bestScore={bestScore}/>
+  function onClick(clickedId) {
+    const clickedPokemon = data.find(pokemon => pokemon.id === clickedId);
+    if (clickedPokemon.clicked === false) {
+      const updatedData = data.map(pokemon =>
+        pokemon.id === clickedId
+          ? { ...pokemon, clicked: true }
+          : pokemon
+      );
+      setData(updatedData);
+      setScore(prev => prev + 1);
+    } else {
+      if (score > bestScore) {
+        setBestScore(score);
+      }
+      const resetData = data.map(pokemon => ({
+        ...pokemon,
+        clicked: false
+      }));
+      setScore(0);
+      setData(resetData);
+    }
+  }
 
+  if (!data) return <p>Loading...</p>;
+
+  return (
+    <div className='container'>
+      <Header score={score} bestScore={bestScore}/>
+      <CardContainer data={data} onClick={onClick} />
+    </div>
   )
 
 
