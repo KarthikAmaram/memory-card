@@ -1,4 +1,5 @@
 import Card from "./Card.jsx"
+import "../styles/CardContainer.css"
 
 function CardContainer({data, onClick}) {
     const shuffled = data.slice().sort(() => Math.random() - .5);

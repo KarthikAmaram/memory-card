@@ -1,3 +1,5 @@
+import "../styles/Card.css"
+
 function Card({pokemon, onClick}) {
     const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`;
 
@@ -5,7 +7,7 @@ function Card({pokemon, onClick}) {
         <div className="card" onClick={() => onClick(pokemon.id)}>
             <img src={imgUrl} alt={pokemon.name} />
             <br></br>
-            <span>{pokemon.name}</span>
+            <span><strong>{pokemon.name}</strong></span>
         </div>
     )
 
