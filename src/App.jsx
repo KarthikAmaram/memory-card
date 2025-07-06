@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react'
+import Header from "./components/Header.jsx"
 import './App.css'
 
 function App() {
   const [data, setData] = useState(null)
+  const [score, setScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,7 +18,8 @@ function App() {
           const id = parts[parts.length - 2];
           return {
             name: pokemon.name,
-            id: id
+            id: id,
+            clicked: false
           }
         })
         setData(pokemonArray)
@@ -26,6 +30,12 @@ function App() {
 
     fetchData();
   }, [])
+
+  return (
+    <Header score={score} bestScore={bestScore}/>
+
+  )
+
 
 }
 
